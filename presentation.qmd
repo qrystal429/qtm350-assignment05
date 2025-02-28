@@ -1,0 +1,90 @@
+---
+title: "World Development Indicators (2022)"
+author: "Krystal Li"
+date: "2025-02-26"
+format: 
+  revealjs:
+    slide-level: 2
+    theme: night
+    transition: convex
+    scrollable: true
+    code-line-numbers: true
+    embed-resources: true
+    footer: "Data Source: World Bank (2022)"
+editor:
+  render-on-save: true
+---
+
+
+# World Development Indicators (2022)
+### An Exploratory Analysis  
+#### *Krystal Li*  
+#### *2025-02-26*  
+
+
+## Overview of GDP Per Capital
+
+- GDP per capita varies widely across nations.
+- High-income countries have significantly larger economic output per person.
+- Notable disparities exist between developed and developing economies.
+
+
+## Insights on Life Expectancy
+
+- Higher GDP per capita correlates with longer life expectancy.
+- Developing countries generally exhibit shorter life expectancy rates.
+- Economic stability influences public health outcomes.
+
+
+## Visualization: Top 20 Countries by GDP Per Capita
+
+```{python}
+#| label: fig-bar
+#| fig-cap: "Top 20 Countries by GDP per Capita"
+#| echo: false
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = pd.read_csv("wdi.csv")
+
+# Select and sort GDP per capita data for the top 20 countries
+gdp_per_capita_data = df[['country', 'gdp_per_capita']].dropna()
+gdp_per_capita_data = gdp_per_capita_data.sort_values(by='gdp_per_capita', ascending=False).head(20)
+
+# Create bar chart
+plt.figure(figsize=(8, 5))
+plt.barh(gdp_per_capita_data['country'], gdp_per_capita_data['gdp_per_capita'], color='purple')
+plt.title('Top 20 Countries by GDP per Capita (2022)')
+plt.xlabel('GDP per Capita (USD)')
+plt.ylabel('Country')
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.show()
+```
+
+
+## Visualization: Life Expectancy vs. GDP Per Capita
+
+```{python}
+#| label: fig-scatter
+#| fig-cap: "Life Expectancy vs. GDP Per Capita (2022)"
+#| echo: false
+
+# Scatter plot of Life Expectancy vs. GDP per Capita
+plt.figure(figsize=(8,5))
+plt.scatter(df['gdp_per_capita'], df['life_expectancy'], color='green', alpha=0.6)
+plt.title('Life Expectancy vs. GDP Per Capita')
+plt.xlabel('GDP Per Capita (USD)')
+plt.ylabel('Life Expectancy (Years)')
+plt.grid(True)
+plt.show()
+```
+
+
+## Conclusion
+
+- Economic prosperity plays a key role in determining health outcomes.
+- Countries with higher GDP per capita generally exhibit better life expectancy.
+- Further analysis could explore additional health and social indicators.

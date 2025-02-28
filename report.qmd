@@ -1,0 +1,127 @@
+---
+title: "World Development Indicators Analysis (2022)"
+author: "Krystal Li"
+date: “2025-02-26”
+format:
+  html: default
+  pdf: default
+bibliography: references.bib
+---
+
+
+# Introduction
+
+The **World Development Indicators (WDI) 2022** dataset provides insights into economic and social indicators across various countries.
+This report analyzes **three key indicators** to understand global economic and social trends:
+
+- **GDP per Capita** → Measures a country's economic prosperity.
+- **Life Expectancy** → Reflects overall health and quality of life.
+- **Unemployment Rate** → Indicates economic stability.
+
+
+# Load the dataset using Python
+
+```{python}
+# Import necessary libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = pd.read_csv("wdi.csv")
+
+# Display the first few rows
+df.head()
+```
+
+
+# Exploratory Data Analysis (EDA)
+
+```{python}
+#| echo: true
+#| eval: true
+
+# Descriptive statistics for 3 selected indicators
+gdp_per_capita_stats = df['gdp_per_capita'].describe()
+life_expectancy_stats = df['life_expectancy'].describe()
+inflation_rate_stats = df['inflation_rate'].describe()
+
+gdp_per_capita_stats, life_expectancy_stats, inflation_rate_stats
+```
+
+**Summary of Findings**
+
+- **GDP per Capita**: The distribution of GDP per capita varies widely, reflecting notable disparities between low-income and high-income nations. The majority of countries have GDP values below the average, while a small number of wealthier nations exhibit significantly higher figures, resulting in a right-skewed distribution.
+- **Life Expectancy**: In most countries, life expectancy ranges from approximately 50 to 85 years, highlighting variations in health outcomes and living conditions across different regions.
+- **Inflation**: The data indicates substantial variation in inflation rates across countries. While the majority experience relatively stable or moderate inflation, a few outliers face either extremely high inflation or deflation, highlighting economic disparities.
+
+
+# Visualizations
+
+## Scatter Plot - Life Expectancy vs. GDP per Capita
+This scatter plot explores the correlation between life expectancy and GDP per capita.
+
+```{python}
+#| label: plot
+#| warning: false
+#| echo: false
+#| eval: true
+#| fig-cap: A scatter plot of Life Expectancy vs. GDP per Capita
+
+plt.figure(figsize=(6,4))
+plt.scatter(df['gdp_per_capita'], df['life_expectancy'], color='blue')
+plt.title('Life Expectancy vs GDP Per Capita')
+plt.xlabel('GDP Per Capita')
+plt.ylabel('Life Expectancy')
+plt.grid(True)
+plt.show()
+```
+
+## Bar Chart - Top 20 Countries by GDP per Capita
+This is Bar chart that shows GDP per capital by top 20 country.
+
+```{python}
+#| echo: false
+#| fig-cap: A bar chart of GDP per capita by the top 20 countries
+#| label: fig-bar
+
+gdp_per_capita_data = df[['country', 'gdp_per_capita']].dropna()
+gdp_per_capita_data = gdp_per_capita_data.sort_values(by='gdp_per_capita', ascending=False).head(20)
+
+plt.figure(figsize=(6, 4))
+plt.bar(gdp_per_capita_data['country'], gdp_per_capita_data['gdp_per_capita'], color='skyblue')
+plt.title('Top 20 Countries by GDP per Capita in 2022')
+plt.xlabel('Country')
+plt.ylabel('GDP per Capita')
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.show()
+```
+
+
+# Summary Statistic Table
+Below is a summary table presenting key statistics for GDP per capita, life expectancy, and inflation rate.
+
+| Statistic   | GDP per Capita (USD) | Life Expectancy (Years) | Inflation Rate (%) |
+|-------------|----------------------|-------------------------|---------------------|
+| Count       | 203                  | 209                     | 169                 |
+| Mean        | 20345.71             | 72.42                   | 12.49               |
+| Std         | 31308.94             | 7.71                    | 19.68               |
+| Min         | 259.03               | 52.99                   | -6.69               |
+| 25%         | 2570.56              | 66.78                   | 5.52                |
+| 50%         | 7587.59              | 73.51                   | 7.97                |
+| 75%         | 25982.63             | 78.48                   | 11.67               |
+| Max         | 240862.18            | 85.38                   | 171.21              |
+
+```{python}
+#| echo: true
+#| tbl-cap: Summary statistics for GDP per capita, life expectancy, and population growth. 
+#| label: tbl-summary
+summary_table = df[['gdp_per_capita', 'life_expectancy', 'inflation_rate']].describe()
+display(summary_table)
+```
+
+
+# References
+According to the World Bank (@worldbank2022), economic indicators reveal significant disparities in wealth and health outcomes.
+The United Nations (@un2023) highlights the significance of these disparities in shaping global economic policies.

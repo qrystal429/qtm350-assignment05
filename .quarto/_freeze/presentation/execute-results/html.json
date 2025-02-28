@@ -1,0 +1,12 @@
+{
+  "hash": "88ccf0d5b5a449561337fe1bc4ca5be7",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"World Development Indicators (2022)\"\nauthor: \"Krystal Li\"\ndate: \"2025-02-26\"\nformat: \n  revealjs:\n    slide-level: 2\n    theme: night\n    transition: convex\n    scrollable: true\n    code-line-numbers: true\n    embed-resources: true\n    footer: \"Data Source: World Bank (2022)\"\neditor:\n  render-on-save: true\n---\n\n\n\n# World Development Indicators (2022)\n### An Exploratory Analysis  \n#### *Krystal Li*  \n#### *2025-02-26*  \n\n\n## Overview of GDP Per Capital\n\n- GDP per capita varies widely across nations.\n- High-income countries have significantly larger economic output per person.\n- Notable disparities exist between developed and developing economies.\n\n\n## Insights on Life Expectancy\n\n- Higher GDP per capita correlates with longer life expectancy.\n- Developing countries generally exhibit shorter life expectancy rates.\n- Economic stability influences public health outcomes.\n\n\n## Visualization: Top 20 Countries by GDP Per Capita\n\n::: {#cell-fig-bar .cell execution_count=1}\n\n::: {.cell-output .cell-output-display}\n![Top 20 Countries by GDP per Capita](presentation_files/figure-revealjs/fig-bar-output-1.png){#fig-bar width=758 height=468}\n:::\n:::\n\n\n## Visualization: Life Expectancy vs. GDP Per Capita\n\n::: {#cell-fig-scatter .cell execution_count=2}\n\n::: {.cell-output .cell-output-display}\n![Life Expectancy vs. GDP Per Capita (2022)](presentation_files/figure-revealjs/fig-scatter-output-1.png){#fig-scatter width=659 height=449}\n:::\n:::\n\n\n## Conclusion\n\n- Economic prosperity plays a key role in determining health outcomes.\n- Countries with higher GDP per capita generally exhibit better life expectancy.\n- Further analysis could explore additional health and social indicators.\n\n",
+    "supporting": [
+      "presentation_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
